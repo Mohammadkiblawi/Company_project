@@ -1286,6 +1286,9 @@ select {
 .inline-flex {
 	display: inline-flex;
 }
+.table {
+	display: table;
+}
 .grid {
 	display: grid;
 }
@@ -1391,6 +1394,9 @@ select {
 .w-96 {
 	width: 24rem;
 }
+.w-1\/4 {
+	width: 25%;
+}
 .min-w-0 {
 	min-width: 0px;
 }
@@ -1426,6 +1432,9 @@ select {
 }
 .flex-shrink-0 {
 	flex-shrink: 0;
+}
+.table-fixed {
+	table-layout: fixed;
 }
 .origin-top-left {
 	transform-origin: top left;
@@ -1688,6 +1697,10 @@ select {
 .bg-blue-400 {
 	--tw-bg-opacity: 1;
 	background-color: rgba(96, 165, 250, var(--tw-bg-opacity));
+}
+.bg-blue-200 {
+	--tw-bg-opacity: 1;
+	background-color: rgba(191, 219, 254, var(--tw-bg-opacity));
 }
 .bg-opacity-25 {
 	--tw-bg-opacity: 0.25;
