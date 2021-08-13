@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
 {
@@ -32,7 +33,6 @@ class ProjectController extends Controller
         } else {
             abort(403);
         }
-        redirect('/projects');
     }
 
     /**
@@ -49,10 +49,11 @@ class ProjectController extends Controller
             'description' => 'required',
             'image_path' => ['required', 'image']
         ]);
-        $extension =  $request->title . '.' . $request->file('image_path')->extension();
+        $extension = $request->file('image_path')->store('uploads', 'public');
+        // $extension =  $request->title . '.' . $request->file('image_path')->extension();
 
 
-        $request->image_path->move(public_path('images'), $extension);
+        // $request->image_path->move(public_path('images'), $extension);
 
         Project::create([
             'title' => $request->input('title'),
@@ -80,7 +81,10 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        //
+        if ($project == null) {
+            abort(404);
+        }
+        return view('project.show', ['project' => $project]);
     }
 
     /**
@@ -91,7 +95,15 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        //
+        if (Auth::user()->role == 1) {
+            if ($project == null) {
+                abort(404);
+            }
+
+            return view('admin.edit', ['project' => $project]);
+        } else {
+            abort(403);
+        }
     }
 
     /**
@@ -103,7 +115,36 @@ class ProjectController extends Controller
      */
     public function update(Request $request, Project $project)
     {
-        //
+        if (Auth::user()->role == 1) {
+
+            if ($project == null) {
+                abort(404);
+            } else {
+
+                $request->validate([
+                    'title' => 'string',
+                    'description' => 'string',
+                    'image_path' => ['image', 'nullable']
+                ]);
+                $image_path = null;
+                if (request('image_path') != null) {
+                    $image_path = $request['image_path']->store('uploads', 'public');
+                } else if ($project->image_path != null) {
+                    $image_path = $project->image_path;
+                } else {
+                    abort(401);
+                }
+                $project->update([
+                    'title' => $request->input('title'),
+                    'description' => $request->input('description'),
+                    'image_path' => $image_path,
+                    'user_id' => auth()->user()->id
+                ]);
+                return redirect('/projects/');
+            }
+        } else {
+            abort(403);
+        }
     }
 
     /**
@@ -114,6 +155,12 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
-        //
+        if ($project == null) {
+            abort(404);
+        }
+
+        $project->delete();
+        Storage::delete(["public/" . $project->image_path]);
+        return redirect('/projects')->with('message', 'project have been delted successfully');
     }
 }
