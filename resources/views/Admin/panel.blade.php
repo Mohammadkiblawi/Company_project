@@ -1,31 +1,29 @@
 @extends('layouts.app')
 @section('content')
-<table class="table-fixed">
-    <thead>
-        <tr>
-            <th class="w-1/2 ...">Title</th>
-            <th class="w-1/4 ...">Author</th>
-            <th class="w-1/4 ...">Views</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>Intro to CSS</td>
-            <td>Adam</td>
-            <td>858</td>
-        </tr>
-        <tr class="bg-blue-200">
-            <td>A Long and Winding Tour of the History of UI Frameworks and Tools and the Impact on Design</td>
-            <td>Adam</td>
-            <td>112</td>
-        </tr>
-        <tr>
-            <td>Intro to JavaScript</td>
-            <td>Chris</td>
-            <td>1,280</td>
-        </tr>
-    </tbody>
-</table>
+<div class="container text-center flex justify-center ">
+    <table class="table-fixed border-separate border-4 p-5 m-10 w-full ">
+        <thead>
+            <tr>
+                <th class=" ">Id</th>
+                <th class="">Name</th>
+                <th class=" ">Email</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($users as $user)
+            <tr>
+                <td class="p-10">{{$user->id}}</td>
+                <td class="p-10">{{$user->name}}</td>
+                <td class="p-10">{{$user->email}}</td>
+
+
+            </tr>
+            @endforeach
+
+        </tbody>
+    </table>
+</div>
 
 
 

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -13,6 +15,12 @@ class UserController extends Controller
      */
     public function index()
     {
+        if (Auth::user()->role == 1) {
+            $users = User::all()->where('confirm', '=', '1');
+            return view('Admin.panel', compact('users'));
+        } else {
+            abort(403);
+        }
     }
 
     /**
@@ -32,7 +40,6 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
     }
 
     /**
@@ -64,9 +71,8 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
     }
 
     /**

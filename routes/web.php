@@ -31,3 +31,5 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/home', function () {
 Route::resource('projects', ProjectController::class);
 Route::get('/project/create', [ProjectController::class, 'create']);
 Route::get('/project/{{project}}/edit', [ProjectController::class, 'edit']);
+Route::get('/users', [UserController::class, 'index']);
+Route::post('/users', [UserController::class, 'update']);
