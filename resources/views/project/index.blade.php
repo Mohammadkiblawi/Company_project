@@ -8,7 +8,7 @@
 </div>
 @endif
 <div class="relative items-center justify-center font-bold mb-10 mt-15  ">
-    <div class="lg:flex items-center container flex-wrap  ">
+    <div class="lg:flex items-center container flex-wrap mt-12 ">
         @foreach ($projects as $project)
 
         <!-- Card 1 -->

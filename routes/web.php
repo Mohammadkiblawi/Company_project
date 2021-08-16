@@ -19,17 +19,25 @@ use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
     return view('auth.login');
-});
+})->middleware('language');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/home', function () {
     return view('home');
-})->name('home');
+})->name('home')->middleware('language');
 
 
 
 // Route::get('/project', [ProjectController::class, 'index'])->name('index');
-Route::resource('projects', ProjectController::class);
+Route::resource('projects', ProjectController::class)->middleware('language');
 Route::get('/project/create', [ProjectController::class, 'create']);
-Route::get('/project/{{project}}/edit', [ProjectController::class, 'edit']);
-Route::get('/users', [UserController::class, 'index']);
+Route::get('/project/{{project}}/edit', [ProjectController::class, 'edit'])->middleware('language');
+Route::get('/users', [UserController::class, 'index'])->middleware('language');
 Route::post('/users', [UserController::class, 'update']);
+Route::get('setlang/{language}', function ($lang) {
+    if ($lang == "ar" || $lang == "en") {
+        session(['language' => $lang]);
+    } else {
+        abort(404);
+    }
+    return redirect()->back();
+});

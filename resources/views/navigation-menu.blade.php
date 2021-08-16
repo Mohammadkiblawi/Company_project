@@ -13,9 +13,10 @@
                 <!-- Navigation Links -->
 
                 <div class="hidden md:flex items-center space-x-1 ml-3 ">
-                    <a href="" class="py-4 px-2 text-green-500 border-b-4 border-green-500 font-semibold ">Home</a>
-                    <a href="" class="py-4 px-2 text-gray-500 font-semibold hover:text-green-500 transition duration-300">Services</a>
-                    <a href="" class="py-4 px-2 text-gray-500 font-semibold hover:text-green-500 transition duration-300">About</a>
+                    <a href="/home" class="py-4 px-2 text-green-500 border-b-4 border-green-500 font-semibold ">Home</a>
+                    @if(Auth::user()->role == 1)
+                    <a href="/users" class="py-4 px-2 text-gray-500 font-semibold hover:text-green-500 transition duration-300">Users</a>
+                    @endif
                     <div class="dropdown inline-block relative">
                         <button class=" text-gray-500 font-semibold py-2 px-4 rounded inline-flex items-center hover:text-green-500 transition duration-300"">
                             <span class=" mr-1 text-gray-500 font-semibold hover:text-green-500 transition duration-300">Languages</span>
@@ -24,8 +25,8 @@
                             </svg>
                         </button>
                         <ul class="dropdown-menu absolute hidden text-gray-700 pt-1">
-                            <li class=""><a class=" bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" href="#">{{__('Arabic')}}</a></li>
-                            <li class=""><a class="bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" href="#">{{__('English')}}</a></li>
+                            <li class=""><a class=" bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" href="setlang/ar">{{__('Arabic')}}</a></li>
+                            <li class=""><a class="bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" href="setlang/en">{{__('English')}}</a></li>
 
                         </ul>
                     </div>
