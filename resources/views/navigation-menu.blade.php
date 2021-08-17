@@ -13,13 +13,13 @@
                 <!-- Navigation Links -->
 
                 <div class="hidden md:flex items-center space-x-1 ml-3 ">
-                    <a href="/home" class="py-4 px-2 text-green-500 border-b-4 border-green-500 font-semibold ">Home</a>
+                    <a href="/home" class="py-4 px-2 text-green-500 border-b-4 border-green-500 font-semibold ">{{__('Home')}}</a>
                     @if(Auth::user()->role == 1)
-                    <a href="/users" class="py-4 px-2 text-gray-500 font-semibold hover:text-green-500 transition duration-300">Users</a>
+                    <a href="/users" class="py-4 px-2 text-gray-500 font-semibold hover:text-green-500 transition duration-300">{{__('Users')}}</a>
                     @endif
                     <div class="dropdown inline-block relative">
                         <button class=" text-gray-500 font-semibold py-2 px-4 rounded inline-flex items-center hover:text-green-500 transition duration-300"">
-                            <span class=" mr-1 text-gray-500 font-semibold hover:text-green-500 transition duration-300">Languages</span>
+                            <span class=" mr-1 text-gray-500 font-semibold hover:text-green-500 transition duration-300">{{__('Languages')}}</span>
                             <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                                 <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
                             </svg>
@@ -31,7 +31,7 @@
                         </ul>
                     </div>
 
-                    <a href="" class="py-4 px-2 text-gray-500 font-semibold hover:text-green-500 transition duration-300">Contact Us</a>
+                    <a href="" class="py-4 px-2 text-gray-500 font-semibold hover:text-green-500 transition duration-300">{{__('Contact Us')}}</a>
                 </div>
             </div>
 
