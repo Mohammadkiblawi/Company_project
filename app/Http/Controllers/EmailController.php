@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Email;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class EmailController extends Controller
 {
@@ -14,8 +15,12 @@ class EmailController extends Controller
      */
     public function index()
     {
-        $emails = Email::all();
-        return view('Admin.panel', compact('emails'));
+        if (Auth::user()->role == 1) {
+            $emails = Email::all();
+            return view('Admin.panel', compact('emails'));
+        } else {
+            abort(403);
+        }
     }
 
     /**
@@ -42,8 +47,7 @@ class EmailController extends Controller
         Email::create([
             'email' => $request->input('email')
         ]);
-        return redirect('/users')
-            ->with('message', 'Your have successfully subscribed to newsletter');
+        return redirect()->back()->with('message', 'you have successfully subscribed to newsletter');;
     }
 
     /**

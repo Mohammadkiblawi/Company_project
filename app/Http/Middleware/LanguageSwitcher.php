@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\User;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -24,7 +25,7 @@ class LanguageSwitcher
 
             // حفظ خيار تغيير اللغة
             if (isset($lang)) {
-                Auth::user()->update(['language' => $lang]);
+                User::find(Auth::id())->update(['language' => $lang]);
             }
 
             App::setLocale(Auth::user()->language);
