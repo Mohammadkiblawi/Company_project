@@ -26,8 +26,6 @@
     <form method="POST" action="/users">
         @csrf
 
-        <input type="hidden" name="user_id" value="{{ Auth()->user()->id }}">
-
         <h1 class=" text-center text-4xl font-bold p-4 text-gray-400">{{__('Subscribe for latest news')}} </h1>
         <div class=" flex flex-wrap -mx-3 mb-6 justify-center">
             <div class="w-3/4 px-3 mt-10">

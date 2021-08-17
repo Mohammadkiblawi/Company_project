@@ -5,17 +5,15 @@
         <thead>
             <tr>
                 <th class=" ">Id</th>
-                <th class="">Name</th>
                 <th class=" ">Email</th>
 
             </tr>
         </thead>
         <tbody>
-            @foreach($users as $user)
+            @foreach($emails as $email)
             <tr>
-                <td class="p-10">{{$user->id}}</td>
-                <td class="p-10">{{$user->name}}</td>
-                <td class="p-10">{{$user->email}}</td>
+                <td class="p-10">{{$email->id}}</td>
+                <td class="p-10">{{$email->email}}</td>
 
 
             </tr>

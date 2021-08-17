@@ -3,6 +3,8 @@
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\EmailController;
+
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -31,8 +33,8 @@ Route::middleware(['auth:sanctum', 'verified', 'language'])->get('/home', functi
 Route::resource('projects', ProjectController::class)->middleware('language');
 Route::get('/project/create', [ProjectController::class, 'create'])->middleware('language');
 Route::get('/project/{{project}}/edit', [ProjectController::class, 'edit'])->middleware('language');
-Route::get('/users', [UserController::class, 'index'])->middleware('language');
-Route::post('/users', [UserController::class, 'update'])->middleware('language');
+Route::get('/users', [EmailController::class, 'index'])->middleware('language');
+Route::post('/users', [EmailController::class, 'store']);
 Route::get('setlang/{language}', function ($lang) {
     if ($lang == "ar" || $lang == "en") {
         session(['language' => $lang]);
