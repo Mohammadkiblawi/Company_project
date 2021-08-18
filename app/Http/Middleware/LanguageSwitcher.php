@@ -20,6 +20,7 @@ class LanguageSwitcher
      */
     public function handle(Request $request, Closure $next)
     {
+        // dd($request->session());
         $lang = $request->session()->get('language', 'en');
         if (Auth::user() != null) {
 
