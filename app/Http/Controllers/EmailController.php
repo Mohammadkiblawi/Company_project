@@ -98,9 +98,13 @@ class EmailController extends Controller
     }
     public function sendMails()
     {
-        $emails = Email::chunk(25, function ($email) {
-            dispatch(new CompanyMail($email));
-        });
-        return 'emails will be sent in the background';
+        if (Auth::user()->role == 1) {
+            $emails = Email::chunk(25, function ($email) {
+                dispatch(new CompanyMail($email));
+            });
+            return 'emails will be sent in the background';
+        } else {
+            abort(403);
+        }
     }
 }
