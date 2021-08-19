@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\CompanyMail;
 use App\Models\Email;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class EmailController extends Controller
 {
@@ -93,5 +95,12 @@ class EmailController extends Controller
     public function destroy(Email $email)
     {
         //
+    }
+    public function sendMails()
+    {
+        $emails = Email::chunk(25, function ($email) {
+            dispatch(new CompanyMail($email));
+        });
+        return 'emails will be sent in the background';
     }
 }

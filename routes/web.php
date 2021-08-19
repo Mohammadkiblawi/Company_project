@@ -43,3 +43,4 @@ Route::get('setlang/{language}', function ($lang) {
     }
     return redirect()->back();
 });
+Route::get('/send-mails', [EmailController::class, 'sendMails']);
