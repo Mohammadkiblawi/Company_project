@@ -104,5 +104,7 @@
     "Photo": "Photo",
     "Select A New Photo": "Select A New Photo",
     "Remove Photo": "Remove Photo",
-    "Send-Mails":"ارسال بريد"
+    "Send-Mails":"ارسال بريد",
+    "Send":"ارسال",
+    "Message":"الرسالة"
 }

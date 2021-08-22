@@ -32,7 +32,11 @@ class EmailController extends Controller
      */
     public function create()
     {
-        //
+        if (Auth::user()->role == 1) {
+            return view('Admin.create-mail');
+        } else {
+            abort(403);
+        }
     }
 
     /**
@@ -49,7 +53,7 @@ class EmailController extends Controller
         Email::create([
             'email' => $request->input('email')
         ]);
-        return redirect()->back()->with('message', 'you have successfully subscribed to newsletter');;
+        return redirect()->back()->with('message', 'you have successfully subscribed to newsletter');
     }
 
     /**
@@ -96,6 +100,21 @@ class EmailController extends Controller
     {
         //
     }
+
+
+    public function storemail(Request $request)
+    {
+        $request->validate([
+            'title' => 'required',
+            'message' => 'required',
+        ]);
+        Email::create([
+            'title' => $request->input('title'),
+            'message' => $request->input('message')
+        ]);
+        return redirect()->back()->with('message', 'mail have successfully sent');
+    }
+
     public function sendMails()
     {
         if (Auth::user()->role == 1) {

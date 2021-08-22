@@ -31,7 +31,7 @@
                         </ul>
                     </div>
                     @if(Auth::user()->role == 1)
-                    <a href="/send-mail" class="py-4 px-2 text-gray-500 font-semibold hover:text-green-500 transition duration-300">{{__('Send-Mails')}}</a>
+                    <a href="/create-mail" class="py-4 px-2 text-gray-500 font-semibold hover:text-green-500 transition duration-300">{{__('Send-Mails')}}</a>
                     @endif
                     <a href="" class="py-4 px-2 text-gray-500 font-semibold hover:text-green-500 transition duration-300">{{__('Contact Us')}}</a>
                 </div>
