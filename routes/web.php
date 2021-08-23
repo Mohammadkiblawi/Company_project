@@ -43,5 +43,5 @@ Route::get('setlang/{language}', function ($lang) {
     }
     return redirect()->back();
 });
-Route::get('/create-mail', [EmailController::class, 'create']);
+Route::get('/create-mail', [EmailController::class, 'create'])->middleware('language');
 Route::post('/send-mail', [EmailController::class, 'storemail']);

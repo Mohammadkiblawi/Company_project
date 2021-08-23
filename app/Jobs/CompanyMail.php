@@ -19,29 +19,70 @@ class CompanyMail implements ShouldQueue
      * Create a new job instance.
      *
      * @return void
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
      */
+
     public $details;
-    public function __construct($details)
+    public $emails;
+
+    public function __construct($details, $emails)
     {
         $this->details = $details;
+        $this->emails = $emails;
     }
 
-    /**
-     * Execute the job.
-     *
-     * @return void
-     */
     public function handle()
     {
-        $emails = Email::all();
+        // إرسال البريد الإلكتروني إلى حزمة البريد الالكتروني المحددة أو للجميع
+
+        $emails = $this->emails ?? Email::all();
         $input['title'] = $this->details['title'];
         $input['message'] = $this->details['message'];
         foreach ($emails as $email) {
             $input['email'] = $email->email;
 
-            Mail::send('email.CompanyMail', ['input' => $input], function ($message) use ($input) {
-                $message->to($input['email'])->subject($input['title']);
-            });
+            Mail::send(
+                'email.CompanyMail',
+                ['input' => $input],
+                function ($message) use ($input) {
+                    $message->to($input['email'])->subject($input['title']);
+                }
+            );
         }
     }
 }
+
+
+
+
+
+
+    // public $details;
+    // public function __construct($details)
+    // {
+    //     $this->details = $details;
+    // }
+
+    // /**
+    //  * Execute the job.
+    //  *
+    //  * @return void
+    //  */
+    // public function handle()
+    // {
+    //     $emails = Email::all();
+    //     $input['title'] = $this->details['title'];
+    //     $input['message'] = $this->details['message'];
+    //     foreach ($emails as $email) {
+    //         $input['email'] = $email->email;
+
+    //         Mail::send('email.CompanyMail', ['input' => $input], function ($message) use ($input) {
+    //             $message->to($input['email'])->subject($input['title']);
+    //         });
+    //     }
+    // }

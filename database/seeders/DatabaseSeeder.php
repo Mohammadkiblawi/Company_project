@@ -18,5 +18,6 @@ class DatabaseSeeder extends Seeder
         User::factory()
             ->times(50)
             ->create();
+        $this->call(EmailSeeder::class);
     }
 }

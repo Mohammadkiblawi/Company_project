@@ -112,8 +112,11 @@ class EmailController extends Controller
             'title' => $request->input('title'),
             'message' => $request->input('message')
         ];
-        $job = (new  CompanyMail($details));
-        dispatch($job);
+        Email::chunk(25, function ($emails) use ($details) {
+            dispatch(new  CompanyMail($details, $emails));
+        });
+        // $job = (new  CompanyMail($details));
+        // dispatch($job);
         return redirect()->back()->with('message', 'mail have successfully sent');
     }
 
