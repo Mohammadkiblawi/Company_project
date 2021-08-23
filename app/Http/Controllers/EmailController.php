@@ -108,22 +108,24 @@ class EmailController extends Controller
             'title' => 'required',
             'message' => 'required',
         ]);
-        Email::create([
+        $details = [
             'title' => $request->input('title'),
             'message' => $request->input('message')
-        ]);
+        ];
+        $job = (new  CompanyMail($details));
+        dispatch($job);
         return redirect()->back()->with('message', 'mail have successfully sent');
     }
 
-    public function sendMails()
-    {
-        if (Auth::user()->role == 1) {
-            $emails = Email::chunk(25, function ($email) {
-                dispatch(new CompanyMail($email));
-            });
-            return 'emails will be sent in the background';
-        } else {
-            abort(403);
-        }
-    }
+    // public function sendMails()
+    // {
+    //     if (Auth::user()->role == 1) {
+    //         $emails = Email::chunk(25, function ($email) {
+    //             dispatch(new CompanyMail($email));
+    //         });
+    //         return 'emails will be sent in the background';
+    //     } else {
+    //         abort(403);
+    //     }
+    // }
 }

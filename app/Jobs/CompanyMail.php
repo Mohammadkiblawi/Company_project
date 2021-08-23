@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Models\Email;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -19,10 +20,10 @@ class CompanyMail implements ShouldQueue
      *
      * @return void
      */
-    public $email;
-    public function __construct($email)
+    public $details;
+    public function __construct($details)
     {
-        $this->email = $email;
+        $this->details = $details;
     }
 
     /**
@@ -32,8 +33,15 @@ class CompanyMail implements ShouldQueue
      */
     public function handle()
     {
-        foreach ($this->email as $email) {
-            Mail::to($email->email)->send(new \App\Mail\CompanyMail());
+        $emails = Email::all();
+        $input['title'] = $this->details['title'];
+        $input['message'] = $this->details['message'];
+        foreach ($emails as $email) {
+            $input['email'] = $email->email;
+
+            Mail::send('email.CompanyMail', ['input' => $input], function ($message) use ($input) {
+                $message->to($input['email'])->subject($input['title']);
+            });
         }
     }
 }

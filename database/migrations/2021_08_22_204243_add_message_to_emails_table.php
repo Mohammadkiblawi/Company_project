@@ -14,7 +14,7 @@ class AddMessageToEmailsTable extends Migration
     public function up()
     {
         Schema::table('emails', function (Blueprint $table) {
-            $table->string('message');
+            $table->string('message')->nullable();
         });
     }
 

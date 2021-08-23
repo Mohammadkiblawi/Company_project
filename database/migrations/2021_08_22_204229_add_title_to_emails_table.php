@@ -14,7 +14,7 @@ class AddTitleToEmailsTable extends Migration
     public function up()
     {
         Schema::table('emails', function (Blueprint $table) {
-            $table->string('title');
+            $table->string('title')->nullable();
         });
     }
 
